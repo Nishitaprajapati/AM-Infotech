@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>invoice</title>
+    <style>
+        body{
+            background-color: #F6F6F6;
+            margin: 0;
+            padding: 0;
+        }
+        h1,h2,h3,h4,h5,h6{
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 80%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .brand-section{
+           background-color: #0d1033;
+           padding: 10px 40px;
+        }
+        .logo{
+            width: 50%;
+        }
+
+        .row{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .col-6{
+            width: 50%;
+            flex: 0 0 auto;
+        }
+        .text-white{
+            color: #fff;
+        }
+        .company-details{
+            float: right;
+            text-align: right;
+        }
+        .body-section{
+            padding: 16px;
+            border: 1px solid gray;
+        }
+        .heading{
+            font-size: 20px;
+            margin-bottom: 08px;
+        }
+        .sub-heading{
+            color: #262626;
+            margin-bottom: 05px;
+        }
+        table{
+            background-color: #fff;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table thead tr{
+            border: 1px solid #111;
+            background-color: #f2f2f2;
+        }
+        table td {
+            vertical-align: middle !important;
+            text-align: center;
+        }
+        table th, table td {
+            padding-top: 08px;
+            padding-bottom: 08px;
+        }
+        .table-bordered{
+            box-shadow: 0px 0px 5px 0.5px gray;
+        }
+        .table-bordered td, .table-bordered th {
+            border: 1px solid #dee2e6;
+        }
+        .text-right{
+            text-align: end;
+        }
+        .w-20{
+            width: 20%;
+        }
+        .float-right{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand-section">
+            <div class="row">
+               	<div class="col-lg-3 col-md-4 logo_agile">
+					<h1 class="text-white">
+						<span>A</span>M <span>I</span>NFOTECH
+					</h1>
+				</div>
+
+
+                <div class="col-6">
+                    <div class="company-details">
+                        <p class="text-white">C-2 Poonjabhai Chambers,Vasna</p>
+                        <p class="text-white"> Ahmedabad. 380007</p>
+                        <p class="text-white">+91 9773166374</p>
+                        <p class="text-white">aminfo055@gmail.com</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body-section">
+            <div class="row">
+                <div class="col-6">
+                    <h2 class="heading"><b>Invoice no</b>:{{order.id}} </h2>
+                    <p class="sub-heading"><b>Date</b>:{{order.Payment_date}} </p>
+                    <p class="sub-heading"><b>Email Address</b>:{{user.Email_id}}</p>
+                </div>
+                <div class="col-6">
+                    <p class="sub-heading"><b>Full Name</b>:{{user.First_name}}</p>
+                    <p class="sub-heading"><b>Address</b>:{{order.address}}  </p>
+                    <p class="sub-heading"><b>Phone Number</b>:{{user.Contact_number}}  </p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="body-section">
+            <h4 class="heading">Ordered Items</h4>
+            <br>
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product </th>
+                        <th class="w-20">Price</th>
+                        <th class="w-20">Quantity</th>
+                        <th class="w-20">total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tbody>
+						{% for i in cart %} {% for j in product %}
+                        {% if forloop.counter == forloop.parentloop.counter %}
+
+                    <tr>
+                        <td>{{j.product_name}}</td>
+                        <td>{{j.price}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td>{{i.totalprice}}</td>
+
+                    </tr>
+                <!--    <tr>
+                        <td colspan="3" class="text-right">Sub Total</td>
+                        <td> 10.XX</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-right">Tax Total %1X</td>
+                        <td> 2</td>
+                    </tr>-->
+
+             {%endif%}
+                        {% endfor %}
+                          {% endfor %}
+             <tr>
+                        <td colspan="3" class="text-center">Grandtotal</td>
+                        <td colspan="1" class="text-center">{{order.Pay_amount}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <h4 class="heading">Payment Status: Paid</h4>
+            <h4 class="heading">Payment Mode: Cash on Delivery</h4>
+        </div>
+
+        <div class="body-section">
+            <p>AM INFOTECH
+            </p>
+        </div>
+    </div>
+<h5>Signature:</h5>
+</body>
+</html>
